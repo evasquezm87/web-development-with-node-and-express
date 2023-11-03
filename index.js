@@ -1,3 +1,6 @@
+//Import modules, is best practice use in this part
+var fortune = require('./lib/fortune.js');
+
 var express = require('express');
 
 var app = express();
@@ -16,9 +19,8 @@ app.get('/', function(req, res){
     res.render('home');
 });
 
-app.get('/about', function(req, res){
-    var randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
-    res.render('about',{fortune: randomFortune});
+app.get('/about', function(req, res){    
+    res.render('about',{fortune: fortune.getFortune()});
 });
 
 //Custom 404 page
@@ -39,11 +41,3 @@ app.listen(app.get('port'), function(){
     app.get('port' + ' press ctrl + c to finish');
 });
 
-//Add dynamic content to views, in this example a fortune cookie
-var fortunes = [
-    "Conquer your fears or they will conquer you",
-    "Rivers needs springs",
-    "Do not fear what you dont known",
-    "You will have a pleasant surprise",
-    "Whenever possible, keep it simple",
-];
